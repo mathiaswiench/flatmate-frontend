@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import type Flatmate from '../../types';
 import './Formular.css';
+import { calculateSettlement } from '../../api/calculateSettlement';
 
 interface FormularProps {
   addFlatmates: (flatmate: Flatmate) => void;
@@ -8,67 +9,104 @@ interface FormularProps {
 }
 
 const Formular = ({ addFlatmates, flatmates }: FormularProps) => {
-  const [name, setName] = useState('');
-  const [expenditure, setExpenditure] = useState(0.0);
-  const [daysAbsent, setDaysAbsent] = useState(0);
+  const [flatmate, setFlatmate] = useState<Flatmate>({
+    name: '',
+    expenditure: undefined,
+    daysAbsent: undefined,
+  });
+  const [totalDays, setTotalDays] = useState<number>();
+  const [showForm, setShowForm] = useState(false);
 
   const onAddFlatmate = (e) => {
     console.log(e);
     e.preventDefault();
-    const flatmate: Flatmate = {
-      name: name,
-      expenditure: expenditure,
-      daysAbsent: daysAbsent,
-    };
-    console.log(flatmate);
     addFlatmates(flatmate);
+    const resetFlatmate = {
+      name: '',
+      expenditure: undefined,
+      daysAbsent: undefined,
+    };
+    setFlatmate(resetFlatmate);
+  };
+
+  const onCalculateSettlement = async (e, totalDays: number) => {
+    e.preventDefault();
+    const response = await calculateSettlement(flatmates, totalDays);
+    console.log(response);
   };
 
   return (
     <div className="form-container">
-      <form>
-        <input
-          className="form-field"
-          type="text"
-          id="name"
-          placeholder="Name ..."
-          required
-          onChange={(e) => setName(e.target.value)}
-        />
-
-        <input
-          type="number"
-          className="form-field"
-          id="expenditure"
-          step="0.01"
-          placeholder="Ausgaben ..."
-          required
-          onChange={(e) => setExpenditure(Number(e.target.value))}
-        />
-
-        <input
-          type="number"
-          className="form-field"
-          id="days_absent"
-          min="0"
-          placeholder="Tage abwesend ..."
-          onChange={(e) => setDaysAbsent(Number(e.target.value))}
-          required
-        />
+      <form id="settlementForm">
+        {!showForm && (
+          <input
+            type="number"
+            className="form-field"
+            id="total_days"
+            step="0.01"
+            value={totalDays}
+            placeholder="Tage im Monat ..."
+            required
+            onChange={(e) => setTotalDays(Number(e.target.value))}
+          />
+        )}
+        {showForm && (
+          <>
+            <input
+              className="form-field"
+              type="text"
+              id="name"
+              placeholder="Name ..."
+              value={flatmate.name}
+              required
+              onChange={(e) =>
+                setFlatmate({ ...flatmate, name: e.target.value })
+              }
+            />
+            <input
+              type="number"
+              className="form-field"
+              id="expenditure"
+              min="0"
+              value={flatmate.expenditure ?? ''}
+              placeholder="Ausgaben ..."
+              onChange={(e) =>
+                setFlatmate({
+                  ...flatmate,
+                  expenditure: Number(e.target.value),
+                })
+              }
+              required
+            />{' '}
+            <input
+              type="number"
+              className="form-field"
+              id="days_absent"
+              value={flatmate.daysAbsent ?? ''}
+              min="0"
+              placeholder="Tage abwesend ..."
+              onChange={(e) =>
+                setFlatmate({ ...flatmate, daysAbsent: Number(e.target.value) })
+              }
+              required
+            />
+          </>
+        )}
         <div className="button-box">
           <button
             className="submit-button"
             style={{ backgroundColor: 'blue' }}
             type="submit"
-            onClick={(e) => onAddFlatmate(e)}
+            onClick={(e) => (showForm ? onAddFlatmate(e) : setShowForm(true))}
           >
-            Hinzufügen
+            {showForm ? 'Hinzufügen' : 'Weiter'}
           </button>
           {flatmates.length >= 2 && (
             <button
               className="submit-button"
               style={{ backgroundColor: 'red' }}
               type="submit"
+              onClick={(e) => onCalculateSettlement(e, totalDays)}
             >
               Abrechnen
             </button>

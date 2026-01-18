@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import './App.css';
 import FlatmateTag from './components/FlatmateTag/FlatmateTag';
 import Formular from './components/Formular/Formular';
@@ -18,10 +18,6 @@ const App = () => {
       },
     ]);
   };
-
-  useEffect(() => {
-    console.log(flatmates);
-  }, []);
 
   return (
     <div className="content">

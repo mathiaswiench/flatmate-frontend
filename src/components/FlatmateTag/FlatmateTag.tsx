@@ -32,10 +32,8 @@ const FlatmateTag = ({ flatmate, index }: FlatmateTagProps) => {
             }}
             onClick={() => setIsPopoverOpen(!isPopoverOpen)}
           >
-            <ul>
-              <li>Ausgaben: {flatmate.expenditure} €</li>
-              <li>Tage abwesend: {flatmate.daysAbsent}</li>
-            </ul>
+            <p>Ausgaben: {flatmate.expenditure} €</p>
+            <p>Tage abwesend: {flatmate.daysAbsent}</p>
           </div>
         </ArrowContainer>
       )}
