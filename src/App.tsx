@@ -3,9 +3,16 @@ import './App.css';
 import FlatmateTag from './components/FlatmateTag/FlatmateTag';
 import Formular from './components/Formular/Formular';
 import type Flatmate from './types';
+import { ModalSettlement } from './components/ModalSettlement/ModalSettlement';
+import type { Settlement } from './types';
 
 const App = () => {
-  const [flatmates, setFlatmates] = useState<Flatmate[]>([]);
+  const [flatmates, setFlatmates] = useState<Flatmate[]>([
+    { name: 'Alice', expenditure: 150, daysAbsent: 3 },
+    { name: 'Bob', expenditure: 200, daysAbsent: 5 },
+  ]);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [settlements, setSettlements] = useState<Settlement[]>([]);
 
   const addFlatmates = (flatmate: Flatmate) => {
     console.log(flatmates);
@@ -19,9 +26,18 @@ const App = () => {
     ]);
   };
 
+  const handleSettlementsCalculation = (settlements: Settlement[]) => {
+    setSettlements(settlements);
+    setModalIsOpen(true);
+  };
+
   return (
     <div className="content">
-      <Formular addFlatmates={addFlatmates} flatmates={flatmates} />
+      <Formular
+        addFlatmates={addFlatmates}
+        flatmates={flatmates}
+        setSettlements={(newSettlements) => handleSettlementsCalculation(newSettlements)}
+      />
       <div className="flatmate-container">
         {flatmates.map((flatmate, index) => (
           <FlatmateTag
@@ -34,6 +50,11 @@ const App = () => {
           />
         ))}
       </div>
+      <ModalSettlement
+        setModalIsOpen={setModalIsOpen}
+        modalIsOpen={modalIsOpen}
+        settlements={settlements}
+      />
     </div>
   );
 };

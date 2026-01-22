@@ -1,7 +1,44 @@
 .tag {
-  background-color: white;
+  background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
   border-radius: 8px;
-  width: 100px;
-  padding: 5px 10px;
-  color: black;
+  padding: 12px 20px;
+  color: var(--text-dark, #1a1a2e);
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border-left: 4px solid var(--primary-color, #4a90d9);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.tag:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.popover-content {
+  background: white;
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  color: var(--text-dark, #1a1a2e);
+  min-width: 160px;
+}
+
+.popover-content p {
+  margin: 0 0 8px 0;
+  font-size: 0.9rem;
+}
+
+.popover-content p:last-child {
+  margin-bottom: 0;
+}
+
+.popover-label {
+  color: var(--text-muted, #666);
+  font-weight: 400;
+}
+
+.popover-value {
+  font-weight: 600;
+  color: var(--text-dark, #1a1a2e);
 }

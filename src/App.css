@@ -2,25 +2,63 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
+:root {
+  --primary-color: #4a90d9;
+  --primary-hover: #357abd;
+  --danger-color: #e74c3c;
+  --danger-hover: #c0392b;
+  --success-color: #27ae60;
+  --text-dark: #1a1a2e;
+  --text-muted: #666;
+  --bg-gradient-start: #020917;
+  --bg-gradient-end: #101725;
+  --card-bg: white;
+  --card-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+}
+
 body {
   margin: 0;
   color: #fff;
   font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
-  background-image: linear-gradient(to bottom, #020917, #101725);
+  background-image: linear-gradient(to bottom, var(--bg-gradient-start), var(--bg-gradient-end));
+  min-height: 100vh;
 }
 
 .content {
   display: flex;
   min-height: 100vh;
-  line-height: 1.1;
+  line-height: 1.5;
   text-align: center;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
+  padding: 40px 20px;
+  box-sizing: border-box;
+}
+
+.app-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+  background: linear-gradient(135deg, #fff 0%, #a8c0ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.app-subtitle {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.6);
+  margin-bottom: 40px;
 }
 
 .flatmate-container {
   display: flex;
-  direction: row;
-  gap: 5px;
-  padding-left: 5px;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  padding: 20px;
+  max-width: 600px;
+  margin: 0 auto;
 }
+

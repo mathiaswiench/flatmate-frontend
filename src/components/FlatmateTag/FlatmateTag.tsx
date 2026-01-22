@@ -15,7 +15,7 @@ const FlatmateTag = ({ flatmate, index }: FlatmateTagProps) => {
       isOpen={isPopoverOpen}
       positions={['top', 'bottom', 'left', 'right']} // preferred positions by priority
       content={({ position, childRect, popoverRect }) => (
-        <ArrowContainer // if you'd like an arrow, you can import the ArrowContainer!
+        <ArrowContainer
           position={position}
           childRect={childRect}
           popoverRect={popoverRect}
@@ -25,15 +25,17 @@ const FlatmateTag = ({ flatmate, index }: FlatmateTagProps) => {
           arrowClassName="popover-arrow"
         >
           <div
-            style={{
-              backgroundColor: 'white',
-              color: 'black',
-              padding: '10px',
-            }}
+            className="popover-content"
             onClick={() => setIsPopoverOpen(!isPopoverOpen)}
           >
-            <p>Ausgaben: {flatmate.expenditure} €</p>
-            <p>Tage abwesend: {flatmate.daysAbsent}</p>
+            <p>
+              <span className="popover-label">Ausgaben: </span>
+              <span className="popover-value">{flatmate.expenditure} €</span>
+            </p>
+            <p>
+              <span className="popover-label">Tage abwesend: </span>
+              <span className="popover-value">{flatmate.daysAbsent}</span>
+            </p>
           </div>
         </ArrowContainer>
       )}

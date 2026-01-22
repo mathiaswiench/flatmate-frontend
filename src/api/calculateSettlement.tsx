@@ -1,10 +1,10 @@
+import type { Settlement } from '../types';
 import type Flatmate from '../types';
 
 export const calculateSettlement = async (
   flamates: Flatmate[],
   totalDays: number,
-) => {
-  console.log(flamates);
+): Promise<Settlement[]> => {
   const response = await fetch('http://localhost:8080/settlement', {
     method: 'POST',
     headers: {
@@ -16,5 +16,6 @@ export const calculateSettlement = async (
     }),
   });
   const settlement = await response.json();
-  return settlement;
+  console.log(settlement);
+  return settlement.settlement;
 };

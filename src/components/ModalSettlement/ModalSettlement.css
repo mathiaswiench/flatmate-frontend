@@ -1,0 +1,99 @@
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  border-radius: 12px;
+  padding: 32px;
+  max-width: 450px;
+  width: 90%;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  outline: none;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+}
+
+.modal-title {
+  margin: 0 0 24px 0;
+  font-size: 1.5rem;
+  color: #1a1a2e;
+  text-align: center;
+}
+
+.settlement-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.settlement-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+  border-radius: 8px;
+  padding: 16px;
+  border-left: 4px solid #4a90d9;
+}
+
+.settlement-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.settlement-names {
+  font-size: 1rem;
+  color: #333;
+}
+
+.settlement-names .debtor {
+  font-weight: 600;
+  color: #e74c3c;
+}
+
+.settlement-names .creditor {
+  font-weight: 600;
+  color: #27ae60;
+}
+
+.settlement-amount {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1a1a2e;
+  white-space: nowrap;
+}
+
+.close-button {
+  display: block;
+  width: 100%;
+  margin-top: 24px;
+  padding: 12px 24px;
+  background: #4a90d9;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.close-button:hover {
+  background: #357abd;
+}
+
+.no-settlements {
+  text-align: center;
+  color: #666;
+  padding: 20px;
+}

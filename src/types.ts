@@ -3,3 +3,9 @@ export default interface Flatmate {
   expenditure: number | undefined;
   daysAbsent: number | undefined;
 }
+
+export interface Settlement {
+  debtor: string;
+  creditor: string;
+  amount: number;
+}

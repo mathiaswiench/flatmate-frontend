@@ -2,13 +2,19 @@ import { useState } from 'react';
 import type Flatmate from '../../types';
 import './Formular.css';
 import { calculateSettlement } from '../../api/calculateSettlement';
+import type { Settlement } from '../../types';
 
 interface FormularProps {
   addFlatmates: (flatmate: Flatmate) => void;
   flatmates: Flatmate[];
+  setSettlements: (settlements: Settlement[]) => void;
 }
 
-const Formular = ({ addFlatmates, flatmates }: FormularProps) => {
+const Formular = ({
+  addFlatmates,
+  flatmates,
+  setSettlements,
+}: FormularProps) => {
   const [flatmate, setFlatmate] = useState<Flatmate>({
     name: '',
     expenditure: undefined,
@@ -33,6 +39,7 @@ const Formular = ({ addFlatmates, flatmates }: FormularProps) => {
     e.preventDefault();
     const response = await calculateSettlement(flatmates, totalDays);
     console.log(response);
+    setSettlements(response);
   };
 
   return (
@@ -94,8 +101,7 @@ const Formular = ({ addFlatmates, flatmates }: FormularProps) => {
         )}
         <div className="button-box">
           <button
-            className="submit-button"
-            style={{ backgroundColor: 'blue' }}
+            className="submit-button primary"
             type="submit"
             onClick={(e) => (showForm ? onAddFlatmate(e) : setShowForm(true))}
           >
@@ -103,8 +109,7 @@ const Formular = ({ addFlatmates, flatmates }: FormularProps) => {
           </button>
           {flatmates.length >= 2 && (
             <button
-              className="submit-button"
-              style={{ backgroundColor: 'red' }}
+              className="submit-button danger"
               type="submit"
               onClick={(e) => onCalculateSettlement(e, totalDays)}
             >
