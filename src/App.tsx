@@ -7,10 +7,7 @@ import { ModalSettlement } from './components/ModalSettlement/ModalSettlement';
 import type { Settlement } from './types';
 
 const App = () => {
-  const [flatmates, setFlatmates] = useState<Flatmate[]>([
-    { name: 'Alice', expenditure: 150, daysAbsent: 3 },
-    { name: 'Bob', expenditure: 200, daysAbsent: 5 },
-  ]);
+  const [flatmates, setFlatmates] = useState<Flatmate[]>([]);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [settlements, setSettlements] = useState<Settlement[]>([]);
 
@@ -36,7 +33,9 @@ const App = () => {
       <Formular
         addFlatmates={addFlatmates}
         flatmates={flatmates}
-        setSettlements={(newSettlements) => handleSettlementsCalculation(newSettlements)}
+        setSettlements={(newSettlements) =>
+          handleSettlementsCalculation(newSettlements)
+        }
       />
       <div className="flatmate-container">
         {flatmates.map((flatmate, index) => (
